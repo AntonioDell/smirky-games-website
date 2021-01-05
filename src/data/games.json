@@ -1,0 +1,56 @@
+{
+    "list": [
+        {
+            "id": 0,
+            "name": "Test Game",
+            "iframeLink": "https://itch.io/embed/874745",
+            "gameLink": "https://antonioda.itch.io/test-game",
+            "preview": {
+                "images": [
+                    {
+                        "name": "testGame/1.png",
+                        "alt": "Winner of best game award 202X"
+                    },
+                    {
+                        "name": "testGame/2.png",
+                        "alt": "Main character Lord Vinkelstein"
+                    },
+                    {
+                        "name": "testGame/3.png",
+                        "alt": "Ability to jump over enemies and simultanously shoot bananas"
+                    },
+                    {
+                        "name": "testGame/4.png",
+                        "alt": "Bana Robot of the Vinkelstein plantage, with which the evil parasites are getting crushed"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 1,
+            "name": "Test Game 2",
+            "iframeLink": "https://itch.io/embed/874745",
+            "gameLink": "https://antonioda.itch.io/test-game-2",
+            "preview": {
+                "images": [
+                    {
+                        "name": "testGame2/1.png",
+                        "alt": "Winner of best game award 202X+1"
+                    },
+                    {
+                        "name": "testGame2/2.png",
+                        "alt": "Main character little Susie"
+                    },
+                    {
+                        "name": "testGame2/3.png",
+                        "alt": "Ability to freeze time fo 1 second"
+                    },
+                    {
+                        "name": "testGame2/4.png",
+                        "alt": "Enemy car to destroy"
+                    }
+                ]
+            }
+        }
+    ]
+}
