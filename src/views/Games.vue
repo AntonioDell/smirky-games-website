@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div
+      ref="selectGame"
+    ></div>
     <h1>These are our games</h1>
     <h2>{{currentGame.name}}</h2>
     <carousel
@@ -55,6 +58,7 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import gamesData from "../data/games.json";
+import setupGameCanvas from "../components/SelectGame";
 
 export default {
   name: "games",
@@ -67,6 +71,9 @@ export default {
     isDetailsVisible: false,
     isIframeReady: false,
   }),
+  mounted() {
+    setupGameCanvas(this.$refs.selectGame, 500, 300);
+  },
   computed: {},
   methods: {
     changeGame(newIndex) {
