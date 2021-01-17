@@ -1,15 +1,13 @@
 <template>
   <div id="app">
     <navigation-bar />
-    <div class="animation-container">
-      <transition
-        name="fade"
-        appear
-        mode="out-in"
-      >
-        <router-view class="animated" />
-      </transition>
-    </div>
+    <transition
+      name="fade"
+      appear
+      mode="out-in"
+    >
+      <router-view class="main-route" />
+    </transition>
   </div>
 </template>
 
@@ -17,11 +15,19 @@
 import NavigationBar from "./components/NavigationBar";
 
 export default {
-  data: () => ({}),
   components: { NavigationBar },
-  methods: {},
-};
 
+  methods: {
+    visibilityChanged: function (isVisible) {
+      this.visible = isVisible;
+    },
+  },
+  data: function () {
+    return {
+      visible: true,
+    };
+  },
+};
 </script>
 
 
@@ -38,10 +44,17 @@ export default {
   color: $light;
   background-color: $dark;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 15px;
+  padding-top: 15px;
 }
 
-.animation-container {
-  overflow-x: hidden;
+.main-route {
+  min-width: 350px;
+  width: 350px;
 }
 
 .fade-enter-active {

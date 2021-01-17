@@ -1,5 +1,11 @@
 <template>
-  <div id="nav">
+  <div
+    id="nav"
+    v-observe-visibility="{
+  callback: visibilityChanged,
+  throttle: 300,
+}"
+  >
     <template v-for="(route, index) in displayRoutes">
       <router-link
         :key="route.path"
@@ -61,25 +67,35 @@ export default {
       }
       this.currentPath = newPath;
     },
+    visibilityChanged(isVisible) {
+      console.log(`I'm ${isVisible ? "" : "not "}visible`);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "theme.scss";
+$defaultColor: $dark;
 
 #nav {
-  padding: 30px;
+  //  padding: 0px 30px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  background: $light;
+  color: $defaultColor;
+  width: 100%;
 }
 
 #nav a {
-  color: $light;
+  color: $defaultColor;
 }
 
 .from-left,
 .to-left {
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right, $primary 50%, $light 50%);
+  background: linear-gradient(to right, $primary 50%, $defaultColor 50%);
   background-clip: text;
   background-size: 200% 100%;
 }
@@ -116,7 +132,7 @@ export default {
 .from-right,
 .to-right {
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right, $light 50%, $primary 50%);
+  background: linear-gradient(to right, $defaultColor 50%, $primary 50%);
   background-clip: text;
   background-size: 200% 100%;
 }

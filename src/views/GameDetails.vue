@@ -14,7 +14,7 @@
       mode="out-in"
     >
       <carousel
-        :per-page="2"
+      :per-page-custom="perPageCustom"
         paginationPosition="top"
         :loop="true"
         class="game-carousel"
@@ -64,6 +64,7 @@ export default {
       iFrameCount: 0,
       isIframeVisible: false,
       isIframeReady: false,
+      perPageCustom: [[350, 1]]
     };
   },
   computed: {
