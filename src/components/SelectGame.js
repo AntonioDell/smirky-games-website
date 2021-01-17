@@ -3,6 +3,8 @@ import canonHeadImg from "../assets/canon_head.png";
 import canonBodyImg from "../assets/canon_body.png";
 import * as WebFont from "webfontloader";
 
+const HIGH_SCORE_MULTIPLYER = 50;
+const MAX_HIGH_SCORE = 999999999;
 export class SelectGame {
   /**
    *
@@ -24,19 +26,34 @@ export class SelectGame {
     });
     div.appendChild(app.view);
 
-    // Text
-    const text1 = new PIXI.Text(
-      "Hello world",
+    const highScoreY = app.screen.height - 40;
+    // Highscore
+    const highScoreLabelText = new PIXI.Text(
+      "Highscore:",
       new PIXI.TextStyle({
         fontFamily: "Architects Daughter",
         fill: "white",
       })
     );
-    text1.x = 10;
-    text1.y = 10;
-    text1.anchor.set(0.5);
-    text1.rotation = Math.PI / 2;
-    text1.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+    highScoreLabelText.x = 10;
+    highScoreLabelText.y = highScoreY;
+    highScoreLabelText.scale.set(0.5);
+    highScoreLabelText.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+    const highScoreCounterText = new PIXI.Text(
+      "".padStart(9, "0"),
+      new PIXI.TextStyle({
+        fontFamily: "Architects Daughter",
+        fill: "white",
+        fontWeight: "bold",
+        letterSpacing: 5,
+      })
+    );
+    highScoreCounterText.x = 10;
+    highScoreCounterText.y = highScoreY + 15;
+    highScoreCounterText.scale.set(0.5);
+    highScoreCounterText.anchor.set(0);
+    highScoreCounterText.texture.baseTexture.scaleMode =
+      PIXI.SCALE_MODES.NEAREST;
 
     // Canon
     const bodyHeight = 16;
@@ -53,10 +70,6 @@ export class SelectGame {
       cursor: "crosshair",
     };
 
-    const gameContainer = new PIXI.Container();
-    gameContainer.interactive = true;
-    gameContainer.cursor = "crosshair";
-
     const background = new PIXI.Sprite(PIXI.Texture.WHITE);
     background.width = app.screen.width;
     background.height = app.screen.height;
@@ -67,35 +80,43 @@ export class SelectGame {
       .lineStyle(10, 0xffffff)
       .drawRect(0, 0, app.screen.width, app.screen.height);
 
-    app.stage.addChild(gameContainer);
-    gameContainer.addChild(background, canonBody, canonHead, border);
-
-    const shootablePosition = { x: 50, y: 25 };
-    const shootableTexts = selectableGames.map((game) => {
-      const shootableGameText = new ShootableGameText(game, shootablePosition);
-      shootablePosition.x += 100;
-      gameContainer.addChild(shootableGameText);
-      return shootableGameText;
-    });
-
-    this.screenRect = app.screen;
-    this.app = app;
-    this.canonHead = canonHead;
-    this.shootableTexts = shootableTexts;
-    this.gameContainer = gameContainer;
-    this.bullets = [];
+    const gameContainer = new PIXI.Container();
+    gameContainer.interactive = true;
+    gameContainer.cursor = "crosshair";
     gameContainer.on("pointerdown", (event) => {
       const bullet = new Bullet(canonHead.position, event.data.global);
       this.bullets.push(bullet);
       gameContainer.addChild(bullet);
       this.followPoint(event.data.global);
     });
-
     gameContainer.on("touchmove", (event) => {
       this.followPoint(event.data.global);
     });
-    console.log("initialGameIdSelected=", initialGameIdSelected);
-    console.log("shootableTexts=", shootableTexts);
+    gameContainer.addChild(
+      background,
+      highScoreLabelText,
+      highScoreCounterText,
+      canonBody,
+      canonHead,
+      border
+    );
+    const shootablePosition = { x: 50, y: 50 };
+    const shootableTexts = selectableGames.map((game) => {
+      const shootableGameText = new ShootableGameText(game, shootablePosition);
+      shootablePosition.x += 100;
+      gameContainer.addChild(shootableGameText);
+      return shootableGameText;
+    });
+    app.stage.addChild(gameContainer);
+
+    this.screenRect = app.screen;
+    this.app = app;
+    this.canonHead = canonHead;
+    this.shootableTexts = shootableTexts;
+    this.highScoreCounterText = highScoreCounterText;
+    this.highScore = 0;
+    this.gameContainer = gameContainer;
+    this.bullets = [];
     this.selectedGame = {
       gameId: initialGameIdSelected,
       animationHandled: false,
@@ -152,6 +173,7 @@ export class SelectGame {
           this.setSelectedGame(text);
           firstHitFound = true;
         }
+        this.addToHighScore(hittingBullets.length);
         this.removeBullets(hittingBullets);
       }
     }
@@ -174,6 +196,7 @@ export class SelectGame {
 
     this.selectedGame.animationHandled = true;
   }
+
   handleUnselectedGame(delta) {
     if (this.unselectedGame.animationHandled) {
       return;
@@ -193,6 +216,21 @@ export class SelectGame {
       (bullet) => bulletsToRemove.indexOf(bullet) == -1
     );
     bulletsToRemove.forEach((bullet) => this.gameContainer.removeChild(bullet));
+  }
+
+  /**
+   *
+   * @param {number} hits
+   */
+  addToHighScore(hits) {
+    if (hits === 0) {
+      return;
+    }
+    this.highScore += hits * HIGH_SCORE_MULTIPLYER;
+    if (this.highScore >= MAX_HIGH_SCORE) {
+      this.highScore = MAX_HIGH_SCORE;
+    }
+    this.highScoreCounterText.text = `${this.highScore}`.padStart(9, "0");
   }
 
   /**
