@@ -13,3 +13,6 @@ Follow the development on our [Trello-Board](https://trello.com/b/igRqIVRv/smirk
 ## build
 
 `npm run build`
+
+# License
+MIT License © 2021 Antonio Dell'Annunziata
