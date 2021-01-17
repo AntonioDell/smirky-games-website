@@ -1,7 +1,7 @@
 {
     "list": [
         {
-            "id": 0,
+            "id": "test-game",
             "name": "Test Game",
             "iframeLink": "https://itch.io/embed/874745",
             "gameLink": "https://antonioda.itch.io/test-game",
@@ -27,9 +27,9 @@
             }
         },
         {
-            "id": 1,
+            "id": "test-game-2",
             "name": "Test Game 2",
-            "iframeLink": "https://itch.io/embed/874745",
+            "iframeLink": "https://itch.io/embed/874746",
             "gameLink": "https://antonioda.itch.io/test-game-2",
             "preview": {
                 "images": [
