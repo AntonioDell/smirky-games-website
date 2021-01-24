@@ -28,16 +28,26 @@ const NO_ANIM = "";
 
 export default {
   name: "navigation-bar",
-  data: () => ({
-    displayRoutes: routes.map((route) => ({
-      ...route,
-      animation: route.path !== router.currentRoute.path ? NO_ANIM : FROM_LEFT,
-    })),
-    currentPath: router.currentRoute.path,
-  }),
+  data: function () {
+    const secondIndexOfSlash = window.location.hash.indexOf("/", 2);
+    const currentMainRoute = window.location.hash.substring(
+      1,
+      secondIndexOfSlash == -1
+        ? window.location.hash.length
+        : secondIndexOfSlash
+    );
+    console.log(currentMainRoute);
+    return {
+      displayRoutes: routes.map((route) => ({
+        ...route,
+        animation: route.path === currentMainRoute ? FROM_LEFT : NO_ANIM,
+      })),
+      currentPath: currentMainRoute,
+    };
+  },
   methods: {
     linkClicked(e) {
-      const newPath = this.$route.path;
+      const newPath = e.path;
       if (newPath === this.currentPath) {
         return;
       }
