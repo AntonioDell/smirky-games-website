@@ -27,7 +27,7 @@ export default {
   }),
   async mounted() {
     // TODO: show placeholder while stuff is loading
-    await loadFonts("Architects Daughter", "Play");
+    await loadFonts("Press Start 2P", "Play");
     this.$refs.selectGame.addEventListener("gameSelected", this.onGameSelected);
     const game = new SelectGame(
       this.$refs.selectGame,

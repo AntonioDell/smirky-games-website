@@ -5,6 +5,9 @@ import * as WebFont from "webfontloader";
 
 const HIGH_SCORE_MULTIPLYER = 50;
 const MAX_HIGH_SCORE = 999999999;
+const DEFAULT_FONT = "Press Start 2P";
+const FONT_SIZE = 24;
+
 export class SelectGame {
   /**
    *
@@ -31,8 +34,9 @@ export class SelectGame {
     const highScoreLabelText = new PIXI.Text(
       "Highscore:",
       new PIXI.TextStyle({
-        fontFamily: "Architects Daughter",
+        fontFamily: DEFAULT_FONT,
         fill: "white",
+        fontSize: FONT_SIZE
       })
     );
     highScoreLabelText.x = 10;
@@ -42,10 +46,9 @@ export class SelectGame {
     const highScoreCounterText = new PIXI.Text(
       "".padStart(9, "0"),
       new PIXI.TextStyle({
-        fontFamily: "Architects Daughter",
+        fontFamily: DEFAULT_FONT,
         fill: "white",
-        fontWeight: "bold",
-        letterSpacing: 5,
+        fontSize: FONT_SIZE
       })
     );
     highScoreCounterText.x = 10;
@@ -100,10 +103,11 @@ export class SelectGame {
       canonHead,
       border
     );
-    const shootablePosition = { x: 50, y: 50 };
+    // Shootable Texts
+    const shootablePosition = { x: 75, y: 50 };
     const shootableTexts = selectableGames.map((game) => {
       const shootableGameText = new ShootableGameText(game, shootablePosition);
-      shootablePosition.x += 100;
+      shootablePosition.x += 150;
       gameContainer.addChild(shootableGameText);
       return shootableGameText;
     });
@@ -388,8 +392,9 @@ class ShootableGameText extends PIXI.Text {
     super(
       name,
       new PIXI.TextStyle({
-        fontFamily: "Architects Daughter",
+        fontFamily: DEFAULT_FONT,
         fill: "white",
+        fontSize: FONT_SIZE
       })
     );
 
