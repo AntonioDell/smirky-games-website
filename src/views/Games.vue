@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="games">
     <div
       ref="selectGame"
       class="gameContainer"
@@ -27,7 +27,7 @@ export default {
   }),
   async mounted() {
     // TODO: show placeholder while stuff is loading
-    await loadFonts("Architects Daughter", "Play");
+    await loadFonts("Press Start 2P", "Play");
     this.$refs.selectGame.addEventListener("gameSelected", this.onGameSelected);
     const game = new SelectGame(
       this.$refs.selectGame,
@@ -61,8 +61,14 @@ export default {
 </script>
 
 <style lang="scss">
-// Bootstrap and its default variables
 @import "theme.scss";
+
+.games {
+  display: flex;
+  flex-direction: column;
+  gap: $defaultGap;
+}
+
 .gameContainer {
   //border: 5px solid white;
   user-select: none;

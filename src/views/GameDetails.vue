@@ -14,7 +14,7 @@
       mode="out-in"
     >
       <carousel
-        :per-page="2"
+        :per-page-custom="perPageCustom"
         paginationPosition="top"
         :loop="true"
         class="game-carousel"
@@ -43,7 +43,6 @@
         :title="`Click to play ${game.name} on itch.io!`"
         :src="game.iframeLink"
         height="167"
-        width="350"
         @load="iframeLoadComplete"
         class="widget-frame"
       >
@@ -64,6 +63,7 @@ export default {
       iFrameCount: 0,
       isIframeVisible: false,
       isIframeReady: false,
+      perPageCustom: [[350, 1]],
     };
   },
   computed: {
@@ -89,11 +89,16 @@ export default {
   },
 };
 </script>
-
-<style>
+<style lang="scss" scoped>
+@import "theme.scss";
+.game-details {
+  display: flex;
+  flex-direction: column;
+  gap: $defaultGap;
+}
 .widget-frame {
   border: none;
-  margin: 0.5em;
   transition-delay: 0.5s;
+  width: 100%;
 }
 </style>

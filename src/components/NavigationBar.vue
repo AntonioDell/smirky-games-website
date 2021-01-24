@@ -1,18 +1,27 @@
 <template>
-  <div id="nav">
-    <template v-for="(route, index) in displayRoutes">
-      <router-link
+  <div
+    id="nav"
+    v-observe-visibility="{
+  callback: visibilityChanged,
+  throttle: 300,
+}"
+  >
+    <template v-for="(route) in displayRoutes">
+      <span
         :key="route.path"
-        :to="route.path"
-        v-on:click.native="linkClicked(route)"
-        :class="[route.animation]"
-      >{{route.name}}</router-link> {{index !== displayRoutes.length ? '|' : ''}}
+        :class="[route.animation, 'link-container']"
+      >
+        <router-link
+          :to="route.path"
+          v-on:click.native="linkClicked(route)"
+        >{{route.name}}</router-link>
+      </span>
     </template>
   </div>
 </template>
 
 <script>
-import router, { routes } from "../router/index";
+import { routes } from "../router/index";
 
 const FROM_LEFT = "from-left";
 const FROM_RIGHT = "from-right";
@@ -20,18 +29,33 @@ const TO_LEFT = "to-left";
 const TO_RIGHT = "to-right";
 const NO_ANIM = "";
 
+/**
+ * Since this.$router.currentRoute.path updates too late, we have to get the currently selected main route from the `window.location`.
+ * @returns the path between the first and the second `/` in `window.location.hash`;
+ */
+function getMainRoute() {
+  const secondIndexOfSlash = window.location.hash.indexOf("/", 2);
+  return window.location.hash.substring(
+    1,
+    secondIndexOfSlash == -1 ? window.location.hash.length : secondIndexOfSlash
+  );
+}
+
 export default {
   name: "navigation-bar",
-  data: () => ({
-    displayRoutes: routes.map((route) => ({
-      ...route,
-      animation: route.path !== router.currentRoute.path ? NO_ANIM : FROM_LEFT,
-    })),
-    currentPath: router.currentRoute.path,
-  }),
+  data: function () {
+    const currentMainRoute = getMainRoute();
+    return {
+      displayRoutes: routes.map((route) => ({
+        ...route,
+        animation: route.path === currentMainRoute ? FROM_LEFT : NO_ANIM,
+      })),
+      currentPath: currentMainRoute,
+    };
+  },
   methods: {
     linkClicked(e) {
-      const newPath = this.$route.path;
+      const newPath = e.path;
       if (newPath === this.currentPath) {
         return;
       }
@@ -61,27 +85,42 @@ export default {
       }
       this.currentPath = newPath;
     },
+    visibilityChanged(isVisible) {
+      console.log(`I'm ${isVisible ? "" : "not "}visible`);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "theme.scss";
+$defaultColor: $dark;
 
 #nav {
-  padding: 30px;
+  color: $defaultColor;
+  width: auto;
+  display: flex;
+  justify-content: space-evenly;
+  //border: .25rem solid $light
 }
 
 #nav a {
   color: $light;
+  mix-blend-mode: difference;
+}
+
+.link-container {
+  background-color: $defaultColor;
+  color: $light;
+  width: 100%;
+  //padding: 0.5rem 0.5rem;
 }
 
 .from-left,
 .to-left {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right, $primary 50%, $light 50%);
-  background-clip: text;
-  background-size: 200% 100%;
+  background: linear-gradient(to right, $light 50%, $defaultColor 50%);
+  /** Random 1% is used to correct rounding errors and prevent white lines */
+  background-size: 201% 100%;
 }
 
 .from-left {
@@ -115,10 +154,9 @@ export default {
 
 .from-right,
 .to-right {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right, $light 50%, $primary 50%);
-  background-clip: text;
-  background-size: 200% 100%;
+  background: linear-gradient(to right, $defaultColor 50%, $light 50%);
+  /** Random 1% is used to correct rounding errors and prevent white lines */
+  background-size: 201% 100%;
 }
 
 .from-right {
