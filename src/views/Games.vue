@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="games">
     <div
       ref="selectGame"
       class="gameContainer"
@@ -61,8 +61,14 @@ export default {
 </script>
 
 <style lang="scss">
-// Bootstrap and its default variables
 @import "theme.scss";
+
+.games {
+  display: flex;
+  flex-direction: column;
+  gap: $defaultGap;
+}
+
 .gameContainer {
   //border: 5px solid white;
   user-select: none;

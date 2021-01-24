@@ -6,19 +6,22 @@
   throttle: 300,
 }"
   >
-    <template v-for="(route, index) in displayRoutes">
-      <router-link
+    <template v-for="(route) in displayRoutes">
+      <span
         :key="route.path"
-        :to="route.path"
-        v-on:click.native="linkClicked(route)"
-        :class="[route.animation]"
-      >{{route.name}}</router-link> {{index !== displayRoutes.length ? '|' : ''}}
+        :class="[route.animation, 'link-container']"
+      >
+        <router-link
+          :to="route.path"
+          v-on:click.native="linkClicked(route)"
+        >{{route.name}}</router-link>
+      </span>
     </template>
   </div>
 </template>
 
 <script>
-import router, { routes } from "../router/index";
+import { routes } from "../router/index";
 
 const FROM_LEFT = "from-left";
 const FROM_RIGHT = "from-right";
@@ -26,17 +29,22 @@ const TO_LEFT = "to-left";
 const TO_RIGHT = "to-right";
 const NO_ANIM = "";
 
+/**
+ * Since this.$router.currentRoute.path updates too late, we have to get the currently selected main route from the `window.location`.
+ * @returns the path between the first and the second `/` in `window.location.hash`;
+ */
+function getMainRoute() {
+  const secondIndexOfSlash = window.location.hash.indexOf("/", 2);
+  return window.location.hash.substring(
+    1,
+    secondIndexOfSlash == -1 ? window.location.hash.length : secondIndexOfSlash
+  );
+}
+
 export default {
   name: "navigation-bar",
   data: function () {
-    const secondIndexOfSlash = window.location.hash.indexOf("/", 2);
-    const currentMainRoute = window.location.hash.substring(
-      1,
-      secondIndexOfSlash == -1
-        ? window.location.hash.length
-        : secondIndexOfSlash
-    );
-    console.log(currentMainRoute);
+    const currentMainRoute = getMainRoute();
     return {
       displayRoutes: routes.map((route) => ({
         ...route,
@@ -89,25 +97,30 @@ export default {
 $defaultColor: $dark;
 
 #nav {
-  //  padding: 0px 30px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 20px;
-  background: $light;
   color: $defaultColor;
-  width: 100%;
+  width: auto;
+  display: flex;
+  justify-content: space-evenly;
+  //border: .25rem solid $light
 }
 
 #nav a {
-  color: $defaultColor;
+  color: $light;
+  mix-blend-mode: difference;
+}
+
+.link-container {
+  background-color: $defaultColor;
+  color: $light;
+  width: 100%;
+  //padding: 0.5rem 0.5rem;
 }
 
 .from-left,
 .to-left {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right, $primary 50%, $defaultColor 50%);
-  background-clip: text;
-  background-size: 200% 100%;
+  background: linear-gradient(to right, $light 50%, $defaultColor 50%);
+  /** Random 1% is used to correct rounding errors and prevent white lines */
+  background-size: 201% 100%;
 }
 
 .from-left {
@@ -141,10 +154,9 @@ $defaultColor: $dark;
 
 .from-right,
 .to-right {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right, $defaultColor 50%, $primary 50%);
-  background-clip: text;
-  background-size: 200% 100%;
+  background: linear-gradient(to right, $defaultColor 50%, $light 50%);
+  /** Random 1% is used to correct rounding errors and prevent white lines */
+  background-size: 201% 100%;
 }
 
 .from-right {

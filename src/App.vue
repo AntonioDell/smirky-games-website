@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navigation-bar />
+    <navigation-bar class="navigation" />
     <transition
       name="fade"
       appear
@@ -48,11 +48,12 @@ export default {
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  gap: 15px;
-  padding-top: 15px;
+  gap: $defaultGap;
+  padding-top: .5rem;
 }
 
-.main-route {
+.main-route,
+.navigation {
   min-width: 350px;
   width: 350px;
 }
