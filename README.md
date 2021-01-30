@@ -14,5 +14,10 @@ Follow the development on our [Trello-Board](https://trello.com/b/igRqIVRv/smirk
 
 `npm run build`
 
+## deploy
+For the following to work, you need to adapt the [deploy.sh](scripts/deploy.sh) to point to your server and have a ssh key served by ssh-agent.
+
+`./scripts/deploy.sh`
+
 # License
 MIT License © 2021 Antonio Dell'Annunziata
