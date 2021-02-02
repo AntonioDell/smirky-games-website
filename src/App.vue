@@ -1,13 +1,21 @@
 <template>
-  <div id="app">
+  <div id="app" class="emulated-flex-gap">
     <navigation-bar class="navigation" />
-    <transition
-      name="fade"
-      appear
-      mode="out-in"
-    >
+    <transition name="fade" appear mode="out-in">
       <router-view class="main-route" />
     </transition>
+    <footer class="footer">
+      <div>DISCLAIMER: Website is still in development!</div>
+      <div>
+        <img src="./assets/github/github_white.png" class="github-logo" />
+        <a href="https://github.com/AntonioDell"> profile</a> |
+        <a href="https://github.com/AntonioDell/smirky-games-website"
+          >website</a
+        >
+        | <a href="https://github.com/AntonioDell/smirky-games-api">server</a>
+      </div>
+      <div>Social media links (XING, LinkedIn)</div>
+    </footer>
   </div>
 </template>
 
@@ -30,7 +38,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss">
 // Import custom SASS variable overrides, or alternatively
 // define your variable overrides here instead
@@ -48,8 +55,7 @@ export default {
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  gap: $defaultGap;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
 }
 
 .main-route,
@@ -91,5 +97,13 @@ export default {
     transform: translateX(10%);
     opacity: 0;
   }
+}
+
+.footer {
+  font-size: $font-size-sm;
+  margin-top: auto !important;
+}
+.github-logo {
+  height: 1.5rem;
 }
 </style>

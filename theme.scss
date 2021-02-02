@@ -1,6 +1,26 @@
-$dark: black;
-$defaultGap: 1.5rem;
 
 // Include Bootstrap and BootstrapVue SCSS files
 @import "~bootstrap/scss/bootstrap.scss";
-@import "~bootstrap-vue/src/index.scss";
+//@import "~bootstrap-vue/src/index.scss";
+
+$primary: $teal;
+$secondary: $indigo;
+$dark: black;
+$defaultGap: 1.5rem;
+
+.emulated-flex-gap > * {
+  margin: ($defaultGap / 2) 0 ($defaultGap / 2) 0;
+}
+
+.emulated-flex-gap > .emulated-flex-gap {
+  margin: 0;
+}
+
+a {
+  color: $primary
+}
+a:hover {
+  //background-color: $light;
+  color: $light;
+}
+

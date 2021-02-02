@@ -1,34 +1,35 @@
 <template>
-  <article-list :article-list="articleList"></article-list>
+  <div>
+    <h1>Welcome home!</h1>
+    <h5>
+      My home, not yours. Obviously. <br />But welcome nethertheless I
+      guess...
+    </h5>
+    <hr />
+    <p>Found yourself here because of an application? Check out my RESUME.</p>
+    <p>Interested in my services? Check them out HERE.</p>
+    <p>
+      Just browsing around, searching for meaning in a vast and empty universe,
+      in which each and every one of us is but a tiny, insignificant grain in
+      the history of humanity? No? It's just me?<br />Well okay then...
+    </p>
+  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import ArticleList from "./animatedArticles/ArticleList";
-
 export default {
   name: "home",
-  components: { ArticleList },
-  data: () => {
-    return {
-      articleList: [
-        {
-          id: 0,
-          title: "Title1",
-          text: "This is a sample Text which will get replaced soon.",
-        },
-        {
-          id: 1,
-          title: "Title2",
-          text: "This is a sample Text which will get replaced soon.",
-        },
-        {
-          id: 2,
-          title: "Title3",
-          text: "This is a sample Text which will get replaced soon.",
-        },
-      ],
-    };
+  components: {},
+  data: function () {
+    return {};
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "theme.scss";
+
+.small {
+  font-size: $font-size-sm;
+}
+</style>

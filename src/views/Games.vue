@@ -1,5 +1,5 @@
 <template>
-  <div class="games">
+  <div class="games emulated-flex-gap">
     <div
       ref="selectGame"
       class="gameContainer"
@@ -66,7 +66,6 @@ export default {
 .games {
   display: flex;
   flex-direction: column;
-  gap: $defaultGap;
 }
 
 .gameContainer {

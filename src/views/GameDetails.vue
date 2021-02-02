@@ -1,5 +1,5 @@
 <template>
-  <div class="game-details">
+  <div class="game-details emulated-flex-gap">
 
     <transition
       name="fade"
@@ -94,7 +94,6 @@ export default {
 .game-details {
   display: flex;
   flex-direction: column;
-  gap: $defaultGap;
 }
 .widget-frame {
   border: none;
