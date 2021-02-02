@@ -1,18 +1,9 @@
 <template>
   <div class="game-details emulated-flex-gap">
-
-    <transition
-      name="fade"
-      appear
-      mode="out-in"
-    >
-      <h1 :key="game.id">{{game.name}}</h1>
+    <transition name="fade" appear mode="out-in">
+      <h1 :key="game.id">{{ game.name }}</h1>
     </transition>
-    <transition
-      name="fade"
-      appear
-      mode="out-in"
-    >
+    <transition name="fade" appear mode="out-in">
       <carousel
         :per-page-custom="perPageCustom"
         paginationPosition="top"
@@ -20,24 +11,13 @@
         class="game-carousel"
         :key="game.id"
       >
-        <slide
-          v-for="image in game.preview.images"
-          :key="image.name"
-        >
-          <img
-            :src="require('@/assets/' + image.name)"
-            :alt="image.alt"
-          />
+        <slide v-for="image in game.preview.images" :key="image.name">
+          <img :src="require('@/assets/' + image.name)" :alt="image.alt" />
         </slide>
       </carousel>
     </transition>
 
-    <transition
-      name="fade"
-      appear
-      mode="out-in"
-      @after-leave="showIframe"
-    >
+    <transition name="fade" appear mode="out-in" @after-leave="showIframe">
       <iframe
         v-show="isIframeVisible"
         :title="`Click to play ${game.name} on itch.io!`"

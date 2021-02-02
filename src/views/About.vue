@@ -2,7 +2,8 @@
   <div class="about">
     <h1>About me</h1>
     <h5>
-      What does my face look like?<br/>Does my resume look good?<br />Be judge, jury and executioner!
+      What does my face look like?<br />Does my resume look good?<br />Be judge,
+      jury and executioner!
     </h5>
     <hr />
     <p>

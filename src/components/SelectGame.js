@@ -36,7 +36,7 @@ export class SelectGame {
       new PIXI.TextStyle({
         fontFamily: DEFAULT_FONT,
         fill: "white",
-        fontSize: FONT_SIZE
+        fontSize: FONT_SIZE,
       })
     );
     highScoreLabelText.x = 10;
@@ -48,7 +48,7 @@ export class SelectGame {
       new PIXI.TextStyle({
         fontFamily: DEFAULT_FONT,
         fill: "white",
-        fontSize: FONT_SIZE
+        fontSize: FONT_SIZE,
       })
     );
     highScoreCounterText.x = 10;
@@ -215,7 +215,6 @@ export class SelectGame {
     if (bulletsToRemove.length === 0) {
       return;
     }
-    console.log("bulletsToRemove are", bulletsToRemove);
     this.bullets = this.bullets.filter(
       (bullet) => bulletsToRemove.indexOf(bullet) == -1
     );
@@ -271,13 +270,13 @@ export function loadFonts(...fonts) {
         families: fonts,
       },
       fontactive: (name, fvd) => {
-        console.log(`Loading font files ${name}:${fvd}`);
+        //console.info(`Loading font files ${name}:${fvd}`);
       },
       active: () => {
         resolve();
       },
       inactive: () => {
-        console.error("Error loading fonts");
+        //console.error("Error loading fonts");
         reject("Error loading fonts");
       },
     });
@@ -394,7 +393,7 @@ class ShootableGameText extends PIXI.Text {
       new PIXI.TextStyle({
         fontFamily: DEFAULT_FONT,
         fill: "white",
-        fontSize: FONT_SIZE
+        fontSize: FONT_SIZE,
       })
     );
 

@@ -1,15 +1,8 @@
 <template>
   <div class="games emulated-flex-gap">
-    <div
-      ref="selectGame"
-      class="gameContainer"
-    ></div>
+    <div ref="selectGame" class="gameContainer"></div>
 
-    <transition
-      name="fade"
-      appear
-      mode="out-in"
-    >
+    <transition name="fade" appear mode="out-in">
       <router-view></router-view>
     </transition>
   </div>
@@ -77,5 +70,4 @@ export default {
 .game-carousel .VueCarousel-dot.VueCarousel-dot--active {
   background-color: $primary !important;
 }
-
 </style>

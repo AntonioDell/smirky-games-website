@@ -4,19 +4,19 @@ import router from "./router";
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.css";
 import VueObserveVisibility from "vue-observe-visibility";
-import VueLogger from 'vuejs-logger';
+import VueLogger from "vuejs-logger";
 
 Vue.config.productionTip = false;
 
 Vue.use(VueObserveVisibility);
 const loggerOptions = {
   isEnabled: true,
-  logLevel : 'debug',
-  stringifyArguments : false,
-  showLogLevel : true,
-  showMethodName : true,
-  separator: '|',
-  showConsoleColors: true
+  logLevel: "debug",
+  stringifyArguments: false,
+  showLogLevel: true,
+  showMethodName: true,
+  separator: "|",
+  showConsoleColors: true,
 };
 Vue.use(VueLogger, loggerOptions);
 

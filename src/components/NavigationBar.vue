@@ -1,10 +1,6 @@
 <template>
   <div
     id="nav"
-    v-observe-visibility="{
-  callback: visibilityChanged,
-  throttle: 300,
-}"
   >
     <template v-for="(route) in displayRoutes">
       <span
@@ -84,9 +80,6 @@ export default {
         // Error
       }
       this.currentPath = newPath;
-    },
-    visibilityChanged(isVisible) {
-      console.log(`I'm ${isVisible ? "" : "not "}visible`);
     },
   },
 };
