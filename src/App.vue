@@ -7,7 +7,7 @@
     <footer class="footer">
       <div>DISCLAIMER: Website is still in development!</div>
       <div>
-        <img src="./assets/github/github_white.png" class="github-logo" />
+        <img src="./assets/github/github_white_small.png" class="github-logo" />
         <a href="https://github.com/AntonioDell"> profile</a> |
         <a href="https://github.com/AntonioDell/smirky-games-website"
           >website</a
@@ -102,8 +102,5 @@ export default {
 .footer {
   font-size: $font-size-sm;
   margin-top: auto !important;
-}
-.github-logo {
-  height: 1.5rem;
 }
 </style>
