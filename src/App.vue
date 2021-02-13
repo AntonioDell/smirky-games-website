@@ -1,30 +1,39 @@
 <template>
-  <div id="app" class="emulated-flex-gap">
-    <navigation-bar class="navigation" />
-    <transition name="fade" appear mode="out-in">
-      <router-view class="main-route" />
-    </transition>
-    <footer class="footer">
-      <div>DISCLAIMER: Website is still in development!</div>
-      <div>
-        <img src="./assets/github/github_white_small.png" class="github-logo" />
-        <a href="https://github.com/AntonioDell"> profile</a> |
-        <a href="https://github.com/AntonioDell/smirky-games-website"
-          >website</a
-        >
-        | <a href="https://github.com/AntonioDell/smirky-games-api">server</a>
-      </div>
-      <div>Social media links (XING, LinkedIn)</div>
-    </footer>
+  <div id="app">
+    <div class="emulated-flex-gap main">
+      <navigation-bar class="navigation" />
+      <transition name="fade" appear mode="out-in">
+        <router-view class="main-route" />
+      </transition>
+      <footer class="footer">
+        <div>DISCLAIMER: Website is still in development!</div>
+        <div>
+          <img
+            src="./assets/github/github_white_small.png"
+            class="github-logo"
+          />
+          <a href="https://github.com/AntonioDell"> profile</a> |
+          <a href="https://github.com/AntonioDell/smirky-games-website"
+            >website</a
+          >
+          | <a href="https://github.com/AntonioDell/smirky-games-api">server</a>
+        </div>
+        <div>Social media links (XING, LinkedIn)</div>
+      </footer>
+    </div>
+    <div ref="anim" class="backgroundAnimation"></div>
   </div>
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar";
+import CityAnimation from "./components/cityAnimation/CityAnimation";
 
 export default {
   components: { NavigationBar },
-
+  mounted: function () {
+    new CityAnimation(this.$refs.anim);
+  },
   methods: {
     visibilityChanged: function (isVisible) {
       this.visible = isVisible;
@@ -49,13 +58,23 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $light;
-  background-color: $dark;
+  //background-color: $dark;
   min-height: 100vh;
+  padding-top: 0.5rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.main {
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  padding-top: 0.5rem;
+  z-index: 1;
+  min-height: 100vh;
+  background: $dark;
+  padding: 0 1rem;
 }
 
 .main-route,
@@ -102,5 +121,18 @@ export default {
 .footer {
   font-size: $font-size-sm;
   margin-top: auto !important;
+}
+
+.backgroundAnimation {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1000 !important;
+  overflow: hidden;
+  margin: 0 !important;
 }
 </style>

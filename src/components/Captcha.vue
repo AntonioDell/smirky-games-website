@@ -4,7 +4,13 @@
     <div class="captchaInput">
       <label for="captcha">The numbers to the left add up to:</label>
       <div class="captchaRow">
-        <input required name="captcha" type="number" placeholder="Hmm..." />
+        <input
+          required
+          name="captcha"
+          type="number"
+          placeholder="Hmm..."
+          v-model="userInput"
+        />
         <button @click="reloadCaptcha">Reload</button>
       </div>
     </div>
@@ -65,6 +71,7 @@ export default {
       ctx.stroke();
 
       this.captchaResult = number1 + number2;
+      this.userInput = undefined
     },
   },
 };

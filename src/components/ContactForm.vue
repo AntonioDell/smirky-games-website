@@ -26,7 +26,7 @@ export default {
   components: { Captcha },
   methods: {
     submit() {
-      console.log(this.$refs.form.checkValidity());
+      //console.log(this.$refs.form.checkValidity());
     },
   },
 };
