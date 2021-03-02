@@ -32,7 +32,9 @@ import CityAnimation from "./components/cityAnimation/CityAnimation";
 export default {
   components: { NavigationBar },
   mounted: function () {
-    new CityAnimation(this.$refs.anim);
+    if (window.innerWidth >= 500) {
+      new CityAnimation(this.$refs.anim);
+    }
   },
   methods: {
     visibilityChanged: function (isVisible) {
@@ -58,7 +60,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $light;
-  //background-color: $dark;
+  background-color: $dark;
   min-height: 100vh;
   position: relative;
   display: flex;
@@ -73,7 +75,6 @@ export default {
   z-index: 1;
   min-height: 100vh;
   background: $dark;
-  padding: 0 1rem;
 }
 
 .main-route,

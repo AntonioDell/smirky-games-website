@@ -1,12 +1,5 @@
 <template>
   <form ref="form" @submit.prevent="submit" novalidate>
-    <textarea
-      required
-      name="message"
-      rows="10"
-      cols="10"
-      placeholder="Anything you want to tell us? Maybe something you want to ask? Don’t be shy, we don’t byte (pun intended)."
-    />
     <input
       name="email"
       type="email"
@@ -14,6 +7,13 @@
       pattern=".*@.*\..*"
     />
     <input name="name" type="text" placeholder="Your name (may be an alias)" />
+    <textarea
+      required
+      name="message"
+      rows="10"
+      cols="10"
+      placeholder="Anything you want to tell us? Maybe something you want to ask? Don’t be shy, we don’t byte (pun intended)."
+    />
     <captcha></captcha>
     <button>Submit</button>
   </form>
