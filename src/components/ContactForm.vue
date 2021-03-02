@@ -42,6 +42,8 @@ form * {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
+  font-weight: bold;
+  
 }
 
 form input,
@@ -49,6 +51,7 @@ form textarea {
   width: 100%;
   border: 5px solid $light;
   resize: none;
+  padding: .5rem;
 }
 
 form button {
@@ -65,7 +68,6 @@ form *::placeholder {
   color: $primary;
   align-content: center;
   text-align: center;
-  padding: 0 0.5rem;
 }
 
 form textarea {

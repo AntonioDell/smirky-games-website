@@ -60,7 +60,6 @@ export default {
   color: $light;
   //background-color: $dark;
   min-height: 100vh;
-  padding-top: 0.5rem;
   position: relative;
   display: flex;
   justify-content: center;

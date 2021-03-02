@@ -3,7 +3,7 @@
     <div>
     <h1>About me</h1>
     <h5>
-      What does my face look like?<br />Does my resume look good?<br />Be judge,
+      What does my face look like?<br />Are you convinced that I'm a capable developer?<br />Be judge,
       jury and executioner!
     </h5></div>
     <p>
@@ -12,7 +12,6 @@
       Big fan of learning new technologies, open source (look at my github for
       proof!), game development and everything web.
     </p>
-    <div>[ Insert resume and link to it ]</div>
     <contact-form />
     <div>[ Insert coin here ]</div>
   </div>

@@ -76,6 +76,7 @@ export class House extends Graphics {
     canvasHeight
   ) {
     super();
+    this.tmpVelovcity = 0;
     this.speed = speed;
     this.windows = windowList;
     this.canvasWidth = canvasWidth;
@@ -114,8 +115,14 @@ export class House extends Graphics {
   onUpdate(delta, parent) {
     if (this.x > this.canvasWidth) {
       parent.removeChild(this);
+      this.destroy({children: true});
+      return;
     }
-    this.x += Math.floor(this.speed * delta);
+    this.tmpVelovcity += this.speed * delta;
+    if (Math.floor(this.tmpVelovcity) > 0) {
+      this.x += Math.floor(this.tmpVelovcity);
+      this.tmpVelovcity = 0;
+    }
     this.windows.forEach((window) => window.onUpdate(delta));
   }
 }
@@ -128,7 +135,7 @@ export class HouseBuilder {
     this.lastHouse = null;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    this.maxWindowRows = Math.floor((canvasHeight / windowHeight) * 0.3);
+    this.maxWindowRows = Math.floor((canvasHeight / windowHeight) * 0.2);
     this.minWindowRows = Math.max(3, Math.floor(this.maxWindowRows / 3));
     this.maxWindowColumns = 4;
     this.minWindowColumns = 2;
